@@ -26,14 +26,11 @@ public class RootController {
     @Autowired
     AppUserService appUserService;
 
-
-
     @RequestMapping("/")
     public String ins() {
 
         return "greeting";
     }
-
 
     @RequestMapping(value = "/login")
     public String login() {
@@ -41,37 +38,25 @@ public class RootController {
         return "login";
     }
 
-
     @RequestMapping("/signUp")
     public String signUp() {
         System.out.println();
         return "signUp";
     }
 
-
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
-    public String signUpPost(@RequestParam String userName, @RequestParam String password) {
-        System.out.println(userName);
-        System.out.println(password);
-
-
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(password);
-        System.out.println(hashedPassword);
-
+    public String signUpPost(@RequestParam String userName,
+                             @RequestParam String password,
+                             @RequestParam String fullName) {
         UserRole userRole = userRoleService.readUserRoleByName("ROLE_USER");
         List<UserRole> roles = new ArrayList<>();
         roles.add(userRole);
-
-        AppUser appUser = new AppUser();
-        appUser.setFullName("Lynas");
-        appUser.setUserName("lynas");
-        appUser.setPassword(hashedPassword);
-        appUser.setRoles(roles);
-
+        AppUser appUser = new AppUser(
+                userName,
+                new BCryptPasswordEncoder().encode(password),
+                fullName,
+                roles);
         appUserService.save(appUser);
-
-
         return "redirect:/login";
     }
 }

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 /**
  * Created by LynAs on 26-Feb-16
  */
-@Service(value = "UserDetailsService")
+@Service
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
     @Autowired
     AppUserService appUserService;

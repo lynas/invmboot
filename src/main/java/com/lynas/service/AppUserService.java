@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Created by LynAs on 26-Feb-16
  */
-@Component("AppUserService")
+@Component
 @Transactional
 public interface AppUserService extends Repository<AppUser, Long> {
     AppUser readAppUserByUserName(String userName);
