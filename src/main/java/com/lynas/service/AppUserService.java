@@ -12,4 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface AppUserService extends Repository<AppUser, Long> {
     AppUser readAppUserByUserName(String userName);
+
+    AppUser save(AppUser appUser);
 }
